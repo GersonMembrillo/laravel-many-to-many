@@ -16,15 +16,7 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = [
-            "HTML",
-            "CSS",
-            "JS",
-            "Vue",
-            "Vite",
-            "PHP",
-            "Laravel",
-        ];
+        $types = ['website', 'e-commerce', 'api', 'database', 'forum', 'social', 'multimedia'];
         foreach ($types as $type) {
             $newType = new Type();
             $newType->name = $type;
@@ -33,3 +25,15 @@ class TypeSeeder extends Seeder
         }
     }
 }
+//     public function run()
+//     {
+
+//         $technologies = ['website', 'e-commerce', 'api', 'database', 'forum', 'social', 'multimedia'];
+//         foreach ($technologies as $technology) {
+//             $newTag = new Technology();
+//             $newTag->name = $technology;
+//             $newTag->slug = Str::slug($technology, '-');
+//             $newTag->save();
+//         }
+//     }
+// }

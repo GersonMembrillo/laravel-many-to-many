@@ -16,6 +16,7 @@
                 <th scope="col">Id</th>
                 <th scope="col">Title</th>
                 <th scope="col">Image</th>
+                <th scope="col">Type</th>
                 <th scope="col">Created</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -27,6 +28,7 @@
                     <td>{{ $project->title }}</td>
                     <td><img class="img-thumbnail" style="width: 100px" src="{{ $project->image }}"
                             alt="{{ $project->title }}"></td>
+                    <td>{{ $project->type ? $project->type->name : 'n/o' }}</td>
                     <td>{{ $project->created_at }}</td>
                     <td>
                         <div class="d-flex justify-content-between align-items-center">

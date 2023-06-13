@@ -55,19 +55,20 @@
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
-        {{-- <div class="form-group">
-            <p>Seleziona i Tag:</p>
-            @foreach ($tags as $tag)
+        <div class="form-group">
+            <p>Select Techs: </p>
+            @foreach ($technologies as $technology)
                 <div>
-                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}" class="form-check-input"
-                        {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
-                    <label for="" class="form-check-label">{{ $tag->name }}</label>
+                    <input type="checkbox" name="technologies[]" value="{{ $technology->id }}" class="form-check-input"
+                        {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}>
+                    <label for="" class="form-check-label">{{ $technology->name }}</label>
                 </div>
-        @endforeach
-        @error('tags')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror --}}
+            @endforeach
+            @error('technologies')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
+        <br>
         <button type="submit" class="btn btn-success">Save</button>
         <button type="reset" class="btn btn-primary">Reset</button>
     </form>

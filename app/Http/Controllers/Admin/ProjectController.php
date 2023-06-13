@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -53,7 +55,6 @@ class ProjectController extends Controller
             $data['image'] = asset('storage/' . $image_path);
         }
 
-
         //se scrivo singoli dati sulla create.blade.php:
         // $project = new Project();
         // $project->title = $data['title'];
@@ -67,6 +68,9 @@ class ProjectController extends Controller
 
         //metodo più pulito
         $project = Project::create($data);
+        if ($request->has('technologies')) {
+            $project->technologies()->attach($request->technologies);
+        };
 
         return redirect()->route('admin.projects.show', $project->slug);
     }
@@ -78,7 +82,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-
         return view('admin.projects.show', compact('project'));
     }
 
@@ -94,8 +97,13 @@ class ProjectController extends Controller
         // if (!Auth::user()->is_admin && $project->type_id !== Auth::id()) {
         //     abort(403);
         // }
+
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view(
+            'admin.projects.edit',
+            compact('project', 'types', 'technologies')
+        );
     }
 
     /**
@@ -117,7 +125,12 @@ class ProjectController extends Controller
             $data['image'] = asset('storage/' . $image_path);
         }
         $project->update($data);
-        return redirect()->route('admin.projects.show', $project->slug)->with('message', "Project is successfully updated");
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($request->technologies);
+        } else {
+            $project->technologies()->sync([]);
+        }
+        return redirect()->route('admin.projects.show', $project->slug)->with('message', "Project successfully updated");
     }
 
     /**

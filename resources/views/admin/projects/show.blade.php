@@ -24,7 +24,11 @@
                         <div class="text-end">
                             <small class="text-body-secondary">
                                 <p class="fw-lighter fst-italic text-black">
-                                    Type: {{ $project->type->name }}</p>
+                                    Type: {{ $project->type ? $project->type->name : 'No Type' }}</p>
+                                @foreach ($project->technologies as $technology)
+                                    Techs: <a href="{{ route('admin.technologies.show', $technology->slug) }}"
+                                        class="badge rounded-pill text-bg-info">{{ $technology->name }}</a>
+                                @endforeach
                             </small>
                         </div>
                     </div>
