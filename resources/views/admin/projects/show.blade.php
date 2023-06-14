@@ -25,10 +25,17 @@
                             <small class="text-body-secondary">
                                 <p class="fw-lighter fst-italic text-black">
                                     Type: {{ $project->type ? $project->type->name : 'No Type' }}</p>
+                                <span class="fw-lighter fst-italic text-black">Techs: </span>
                                 @foreach ($project->technologies as $technology)
-                                    Techs: <a href="{{ route('admin.technologies.show', $technology->slug) }}"
+                                    <a href="{{ route('admin.technologies.show', $technology->slug) }}"
                                         class="badge rounded-pill text-bg-info">{{ $technology->name }}</a>
                                 @endforeach
+                                {{-- Techs: @forelse ($project->technologies as $technology)
+                                    <a href="{{ route('admin.technologies.show', $technology->slug) }}"
+                                        class="badge rounded-pill text-bg-info">{{ $technology->name }}</a>
+                                        @empty
+                                        No tech!
+                                @endforelse --}}
                             </small>
                         </div>
                     </div>

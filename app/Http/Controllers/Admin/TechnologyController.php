@@ -15,7 +15,7 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        $tags = Technology::all();
+        $technologies = Technology::all();
         return view('admin.technologies.index', compact('technologies'));
     }
 
@@ -46,7 +46,7 @@ class TechnologyController extends Controller
      * @param  \App\Models\Technology  $technology
      * @return \Illuminate\Http\Response
      */
-    public function show(Technology $tag)
+    public function show(Technology $technology)
     {
         return view('admin.technologies.show', compact('technology'));
     }

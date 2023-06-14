@@ -81,3 +81,6 @@
         bkLib.onDomLoaded(nicEditors.allTextAreas);
     </script>
 @endsection
+
+{{-- post
+category --}}

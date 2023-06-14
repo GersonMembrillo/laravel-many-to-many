@@ -11,13 +11,13 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'image', 'description'];
+    protected $fillable = ['title', 'slug', 'image', 'description', 'type_id'];
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
     }
 
-    public function technologies()
+    public function technologies(): BelongsToMany
     {
         return $this->belongsToMany(Technology::class);
     }
